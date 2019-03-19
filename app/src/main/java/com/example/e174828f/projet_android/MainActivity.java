@@ -2,6 +2,7 @@ package com.example.e174828f.projet_android;
 
 
 import android.support.v7.app.AppCompatActivity;
+import java.lang.reflect.Type;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +14,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
@@ -37,18 +42,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("id", null);
-
-        String result = gson.toJson(map);
-        System.out.println(result);  // {}
-
 
         rechercher = findViewById(R.id.rechercher);
         nomEnt = findViewById(R.id.nomEnt);
         dateFilm = findViewById(R.id.dateFilm);
         nbNombre = findViewById(R.id.nbsearch);
         nb = findViewById(R.id.nbfilm);
+
+        final Gson gson = new GsonBuilder()
+                .serializeNulls()
+                .disableHtmlEscaping()
+                .create();
+
+
+
+
 
 
         Ion.with(this)
@@ -57,9 +65,19 @@ public class MainActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        Log.d("data", "onCompleted: " + result.toString());
+                        Log.d("data", "onCompleted:"+ result);
+                        Type listType = new TypeToken<ArrayList<Genre>>(){}.getType();
+                        ArrayList<Genre> genres =  new Gson().fromJson( result.getAsJsonArray(), listType);
+
+                        for (Genre genre : genres) {
+                            Log.e("MainActivity", genre.toString());
+                        }
                     }
                 });
+
+
+
+
 
 
         List<String> spinnerArray =  new ArrayList<String>();
