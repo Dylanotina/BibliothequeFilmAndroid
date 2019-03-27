@@ -1,20 +1,19 @@
 package com.example.e174828f.projet_android;
 
-import android.telecom.Call;
-
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 import java.util.List;
+import retrofit2.Call;
 
 
 @SuppressWarnings("ALL")
 public interface ListFilms {
 
     public static final String endpoint ="https://api.themoviedb.org/3/";
-    public  static final String api_key="34d79476b86de9146c6f439a4b34c68d";
+
 
 @GET("/movie/{movie_id}")
-Call<Film> getFilmsResults(@Path("id") int movie_id,@Query("api_key") String api_key);
+Call<List<Film>> getFilmsResults(@Path("id") int movie_id, @Query("api_key") String api_key);
 
 }
