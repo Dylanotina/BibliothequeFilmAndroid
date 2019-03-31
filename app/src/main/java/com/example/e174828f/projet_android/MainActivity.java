@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ListGenre>call, Response<ListGenre> response) {
                 ListGenre listGenre = response.body();
-
                 List<Genre> genre = listGenre.getAllElement();
                 Log.d("tag", "onResponse: " + genre.toString());
 

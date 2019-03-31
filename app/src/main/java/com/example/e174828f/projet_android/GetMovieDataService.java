@@ -16,4 +16,5 @@ public interface GetMovieDataService {
     @GET("list?api_key=6f24e995a9146dc661b833c2a79481b5")
     Call<ListGenre> getGenre();
 
+
 }

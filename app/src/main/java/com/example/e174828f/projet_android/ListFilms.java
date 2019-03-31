@@ -13,7 +13,13 @@ public interface ListFilms {
     public static final String endpoint ="https://api.themoviedb.org/3/";
 
 
-@GET("/movie/{movie_id}")
-Call<List<Film>> getFilmsResults(@Path("id") int movie_id, @Query("api_key") String api_key);
+
+@GET("movie/{movie_id}?api_key=6f24e995a9146dc661b833c2a79481b5")
+Call<Films> getFilmsResults(@Path("id") int movie_id);
+
+@GET("discover/movie?api_key=6f24e995a9146dc661b833c2a79481b5")
+Call<Films> getFilms();
+
+
 
 }
