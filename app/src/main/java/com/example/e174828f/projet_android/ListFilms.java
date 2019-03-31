@@ -15,6 +15,6 @@ public interface ListFilms {
     public  static final String api_key="34d79476b86de9146c6f439a4b34c68d";
 
 @GET("/movie/{movie_id}")
-Call<Film> getFilmsResults(@Path("id") int movie_id,@Query("api_key") String api_key);
+ getFilmsResults(@Path("id") int movie_id,@Query("api_key") String api_key);
 
 }
