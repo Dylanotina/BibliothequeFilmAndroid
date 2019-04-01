@@ -1,6 +1,7 @@
 package com.example.e174828f.projet_android;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.LoginFilter;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner genre;
     private Call<Genre> call;
     private List<Genre> movieResults;
+    private Button autreRecherche;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        autreRecherche = findViewById(R.id.Autrerecherche);
+
+
+        autreRecherche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Activite_AutreRecherche.class);
+                startActivity(intent);
+            }
+        });
 
 
 

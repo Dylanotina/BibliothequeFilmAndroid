@@ -13,7 +13,7 @@ public interface GetMovieDataService {
 
     String BASE_URL = "https://api.themoviedb.org/3/genre/movie/";
 
-    @GET("list?api_key=6f24e995a9146dc661b833c2a79481b5")
+    @GET("list?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<ListGenre> getGenre();
 
 }

@@ -116,13 +116,14 @@
 
     <Button
         android:id="@+id/rechercher"
-        android:layout_width="wrap_content"
+        android:layout_width="116dp"
         android:layout_height="wrap_content"
         android:text="Rechercher"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Autrerecherche"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nbsearch" />
+        app:layout_constraintTop_toBottomOf="@+id/nbsearch"
+        app:layout_constraintVertical_bias="0.593" />
 
     <TextView
         android:id="@+id/nbfilm"
@@ -133,5 +134,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nbsearch"
         app:layout_constraintTop_toTopOf="@+id/nbsearch" />
+
+    <Button
+        android:id="@+id/Autrerecherche"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:text="Autre recherche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toEndOf="@+id/nombre"
+        app:layout_constraintTop_toBottomOf="@+id/nbsearch"
+        app:layout_constraintVertical_bias="0.593" />
 
 </android.support.constraint.ConstraintLayout>
