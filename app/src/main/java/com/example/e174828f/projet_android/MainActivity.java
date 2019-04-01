@@ -28,6 +28,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static java.lang.String.valueOf;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String API_KEY = "6f24e995a9146dc661b833c2a79481b5";
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         dateFilm = findViewById(R.id.dateFilm);
         nbNombre = findViewById(R.id.nbsearch);
         nb = findViewById(R.id.nbfilm);
+
+        nb.setText(valueOf(nbNombre.getProgress()));
+        nomEnt.setText("Entreprise de Production");
 
         final List<String> spinnerArray =  new ArrayList<String>();
 
@@ -108,12 +113,14 @@ public class MainActivity extends AppCompatActivity {
         nbNombre.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Toast.makeText(MainActivity.this,nbNombre.getProgress(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this,progress, Toast.LENGTH_SHORT).show();
+                nb.setText(valueOf(progress));
+//                Log.d("onProgressChanged", "onProgressChanged: " + progress);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+//                Toast.makeText(MainActivity.this, "LOL", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         rechercher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, sItems.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, sItems.getSelectedItem().toString() + " " + nb.getText() + " " + nomEnt.getText(), Toast.LENGTH_SHORT).show();
             }
         });
     }
