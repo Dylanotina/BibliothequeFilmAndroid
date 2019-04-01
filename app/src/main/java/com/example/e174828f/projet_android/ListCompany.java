@@ -19,5 +19,16 @@ public class ListCompany {
     public List<Company> getAllElement(){
         return company;
     }
+
+
+    public Company getElement(String s){
+
+        for (int i = 0; i<company.size(); i++) {
+            if (s.equals(company.get(i).getName())) {
+                return company.get(i);
+            }
+        }
+        return null;
+    }
 }
 

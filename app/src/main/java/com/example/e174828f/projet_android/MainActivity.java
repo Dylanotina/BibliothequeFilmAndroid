@@ -47,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText dateFilm;
     private SeekBar nbNombre;
     private TextView nb;
-    private Spinner genre;
+    private List<Genre> genre;
     private List<Company> c1;
+    private ListGenre listGenre;
+    private ListCompany listCompany;
     private Button autreRecherche;
 
     @Override
@@ -95,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<ListGenre>() {
             @Override
             public void onResponse(Call<ListGenre>call, Response<ListGenre> response) {
-                ListGenre listGenre = response.body();
+                listGenre = response.body();
 
-                List<Genre> genre = listGenre.getAllElement();
+                genre = listGenre.getAllElement();
 //                Log.d("tag", "onResponse: " + genre.toString());
                 for (int i = 0; i<genre.size(); i++) {
                     spinnerArray.add(genre.get(i).getName());
@@ -116,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, spinnerArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genre = (Spinner) findViewById(R.id.spinner);
-        genre.setAdapter(adapter);
+        final Spinner sItem = findViewById(R.id.spinner);
+        sItem.setAdapter(adapter);
 
 
         nomEnt.setThreshold(1);
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                        @Override
                        public void onResponse(Call<ListCompany> call, Response<ListCompany> response) {
                            spinnerCompany.clear();
-                           ListCompany listCompany = response.body();
+                           listCompany = response.body();
                            Log.d("tag", "onResponse: " + listCompany.toString());
                            c1 = listCompany.getAllElement();
                            for (int i = 0; i<c1.size(); i++) {
@@ -208,8 +210,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if( (genre.getSelectedItem().toString().isEmpty() || genre.getSelectedItem().toString().equals("Pas de Selection"))
-                && (dateFilm.getText().toString().isEmpty())) {
+                if( (listGenre.getElement(sItem.getSelectedItem().toString()) == null)
+                        || (dateFilm.getText().toString().isEmpty())
+                        || listCompany.getElement(nomEnt.getText().toString()) == null) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     builder.setCancelable(true);
@@ -225,7 +228,17 @@ public class MainActivity extends AppCompatActivity {
                     dialog.show();
                 }
                 else {
-                    Toast.makeText(MainActivity.this, genre.getSelectedItem().toString() + " " + nb.getText() + " " + nomEnt.getText(), Toast.LENGTH_SHORT).show();
+
+                   int idgenre =  listGenre.getElement(sItem.getSelectedItem().toString()).getId();
+                    Log.d("ea", "onClick: " + listCompany.toString());
+                   int idcompany = listCompany.getElement(nomEnt.getText().toString()).getId();
+
+                    Intent i = new Intent(view.getContext(), Activite_Liste.class);
+                    i.putExtra("idEnt", idcompany);
+                    i.putExtra("idGenre", idgenre);
+                    i.putExtra("nbResult", nbNombre.getProgress());
+                    i.putExtra("date", dateFilm.getText());
+                    startActivity(i);
                 }
             }
         });
