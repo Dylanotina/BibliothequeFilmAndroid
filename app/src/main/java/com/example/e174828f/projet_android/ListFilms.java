@@ -1,4 +1,4 @@
-package com.example.e174828f.projet_android;
+/*package com.example.e174828f.projet_android;
 
 import java.util.List;
 
@@ -28,4 +28,4 @@ Call<Films> getFilms(@Query("page") int page);
 
 
 
-}
+}*/

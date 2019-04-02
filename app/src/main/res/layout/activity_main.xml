@@ -23,7 +23,7 @@
         android:layout_height="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/films"
         app:layout_constraintVertical_bias="0.469" />
@@ -35,7 +35,18 @@
         android:text="Date"
         app:layout_constraintBaseline_toBaselineOf="@+id/dateFilm"
         app:layout_constraintEnd_toEndOf="@+id/genre"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/genre" />
+
+    <TextView
+        android:id="@+id/date2"
+        android:layout_width="36dp"
+        android:layout_height="21dp"
+        android:text="Prod."
+        app:layout_constraintBaseline_toBaselineOf="@+id/nomEnt"
+        app:layout_constraintEnd_toEndOf="@+id/date"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/date" />
 
     <TextView
         android:id="@+id/genre"
@@ -53,6 +64,8 @@
         android:id="@+id/nbsearch"
         android:layout_width="144dp"
         android:layout_height="27dp"
+        android:max="100"
+        android:progress="20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.679"
@@ -68,19 +81,18 @@
         android:text="Nombre"
         app:layout_constraintBottom_toBottomOf="@+id/nbsearch"
         app:layout_constraintEnd_toStartOf="@+id/nbsearch"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genre"
         app:layout_constraintVertical_bias="0.985" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/nomEnt"
         android:layout_width="166dp"
         android:layout_height="44dp"
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/dateFilm"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
         app:layout_constraintHorizontal_bias="1.0"
@@ -96,29 +108,42 @@
         android:inputType="numberSigned"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
-        app:layout_constraintHorizontal_bias="0.739"
+        app:layout_constraintHorizontal_bias="0.695"
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.778" />
 
     <Button
         android:id="@+id/rechercher"
-        android:layout_width="wrap_content"
+        android:layout_width="116dp"
         android:layout_height="wrap_content"
         android:text="Rechercher"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Autrerecherche"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nbsearch" />
+        app:layout_constraintTop_toBottomOf="@+id/nbsearch"
+        app:layout_constraintVertical_bias="0.593" />
 
     <TextView
         android:id="@+id/nbfilm"
-        android:layout_width="22dp"
+        android:layout_width="35dp"
         android:layout_height="21dp"
         android:text="0"
         app:layout_constraintBottom_toBottomOf="@+id/nbsearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nbsearch"
         app:layout_constraintTop_toTopOf="@+id/nbsearch" />
+
+    <Button
+        android:id="@+id/Autrerecherche"
+        android:layout_width="119dp"
+        android:layout_height="wrap_content"
+        android:text="Autre recherche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toEndOf="@+id/nombre"
+        app:layout_constraintTop_toBottomOf="@+id/nbsearch"
+        app:layout_constraintVertical_bias="0.593" />
 
 </android.support.constraint.ConstraintLayout>
