@@ -40,11 +40,11 @@ private String[] films;
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(ListFilms.endpoint)
+                            .baseUrl(GetMovieDataService.BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
 
-            ListFilms api =retrofit.create(ListFilms.class);
+            GetMovieDataService api =retrofit.create(GetMovieDataService.class);
         Call<Films> call = api.getFilms(1);
 
 

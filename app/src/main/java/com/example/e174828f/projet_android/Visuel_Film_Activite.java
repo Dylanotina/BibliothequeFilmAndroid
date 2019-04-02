@@ -41,11 +41,11 @@ public class Visuel_Film_Activite extends AppCompatActivity {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ListFilms.endpoint)
+                .baseUrl(GetMovieDataService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        ListFilms api =retrofit.create(ListFilms.class);
+        GetMovieDataService api =retrofit.create(GetMovieDataService.class);
          Call<Film> filmResult=api.getFilmsResults(movieid);
          filmResult.enqueue(new Callback<Film>() {
              @Override

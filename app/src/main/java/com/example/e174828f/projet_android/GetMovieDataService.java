@@ -7,6 +7,7 @@ import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -20,5 +21,16 @@ public interface GetMovieDataService {
 
     @GET("search/company")
     Call<ListCompany> getCompany(@QueryMap Map<String, String> string);
+
+    @GET("movie/{movie_id}/images?api_key=6f24e995a9146dc661b833c2a79481b5")
+    Call<ImageFilm> getImageFilm(@Path("movie_id") int movie_id);
+
+
+    @GET("movie/{movie_id}?api_key=6f24e995a9146dc661b833c2a79481b5")
+    Call<Film> getFilmsResults(@Path("movie_id") int movie_id);
+
+    @GET("discover/movie?api_key=6f24e995a9146dc661b833c2a79481b5")
+    Call<Films> getFilms(@Query("page") int page);
+
 
 }
