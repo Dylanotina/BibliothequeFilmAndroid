@@ -9,6 +9,10 @@ public class Film implements Serializable {
     private String original_title;
     private String overview;
     private String release_date;
+    private String image;
+
+
+
     private Genre genre;
     private ArrayList<Film> filmsResults;
 
@@ -25,6 +29,13 @@ public class Film implements Serializable {
         this.filmsResults = filmsResults;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
     public ArrayList<Film> getFilmsResults() {
         return filmsResults;
     }
