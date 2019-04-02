@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">La bibliothèque des films</string>
+    <string name="overview">Overview</string>
+    <string name="title">Titre</string>
 </resources>
