@@ -11,8 +11,5 @@
 app/.idea/.name
 app/.idea/caches/build_file_checksums.ser
 app/.idea/caches/gradle_models.ser
-*.xml
-*.xml
-*.xml
 app/.idea/gradle.xml
 app/.idea/modules.xml
