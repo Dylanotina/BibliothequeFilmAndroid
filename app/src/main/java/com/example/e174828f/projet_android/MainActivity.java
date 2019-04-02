@@ -58,28 +58,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //Initialisation des Items
         rechercher = findViewById(R.id.rechercher);
         nomEnt = findViewById(R.id.nomEnt);
         dateFilm = findViewById(R.id.dateFilm);
         nbNombre = findViewById(R.id.nbsearch);
         nb = findViewById(R.id.nbfilm);
-
         nb.setText(valueOf(nbNombre.getProgress()));
 
-
+        //Initialisation des ArrayList
         final List<String> spinnerArray =  new ArrayList<String>();
         final List<String> spinnerCompany = new ArrayList<String>();
 
-
-
-
-        /*Retrofit retro = new Retrofit.Builder()
-                .baseUrl("https://api.themoviedb.org/3/genre/movie/list?api_key=6f24e995a9146dc661b833c2a79481b5")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        */
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(GetMovieDataService.BASE_URL)
@@ -90,46 +80,47 @@ public class MainActivity extends AppCompatActivity {
         final GetMovieDataService getMovieDataService = retrofit.create(GetMovieDataService.class);
 
 
-
+        //On appelle une méthode de l'interface getMovieDataService
         Call<ListGenre> call = getMovieDataService.getGenre();
+        //On rajoute dans le spinner une Premier Item Pas de Selection
         spinnerArray.add("Pas de Selection");
+
 
         call.enqueue(new Callback<ListGenre>() {
             @Override
+            //A la reponse
             public void onResponse(Call<ListGenre>call, Response<ListGenre> response) {
+                //On récupère le JSON dans le body
                 listGenre = response.body();
 
+                //On déplace la réponse dans une List de genre
                 genre = listGenre.getAllElement();
-//                Log.d("tag", "onResponse: " + genre.toString());
+                //On parcours la Liste
                 for (int i = 0; i<genre.size(); i++) {
+                    //On rajoute dans la liste les genres
                     spinnerArray.add(genre.get(i).getName());
                 }
             }
 
             @Override
             public void onFailure(Call<ListGenre> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(),t.getMessage(), Toast.LENGTH_SHORT).show();
-//
                 Log.d("TAG", "onFailure: " + t.getMessage());
             }
         });
 
+        //Adapter de la liste de genre
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_item, spinnerArray);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner sItem = findViewById(R.id.spinner);
         sItem.setAdapter(adapter);
 
-
+        //On indique que l'on veut que la liste se "montre" a partir d'un seul caractère
         nomEnt.setThreshold(1);
-
-
-        /**TODO
-         * AUTOCOMPLETION si possible
-         */
-
+        //On rajoute une valeur de base
         spinnerCompany.add("Pas de Selection");
+
+        //AutoComplétion du champs text
         nomEnt.addTextChangedListener(new TextWatcher() {
            @Override
            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -142,28 +133,38 @@ public class MainActivity extends AppCompatActivity {
            }
 
            @Override
+           //après chaque completion,
            public void afterTextChanged(Editable s) {
+
+               //Si le text n'est pas vide
                if(!s.toString().isEmpty()) {
-                   Call<ListCompany> callCompany = getMovieDataService.getCompany(ImmutableMap.of("api_key", "34d79476b86de9146c6f439a4b34c68d", "query", s.toString()));
-                   Log.d("callCompany", callCompany.request().toString());
-                   callCompany.enqueue(new Callback<ListCompany>() {
-                       @Override
-                       public void onResponse(Call<ListCompany> call, Response<ListCompany> response) {
-                           spinnerCompany.clear();
-                           listCompany = response.body();
-                           Log.d("tag", "onResponse: " + listCompany.toString());
-                           c1 = listCompany.getAllElement();
-                           for (int i = 0; i<c1.size(); i++) {
-                               spinnerCompany.add(c1.get(i).getName());
-                           }
-                           ArrayAdapter nomCompany = new ArrayAdapter(getBaseContext(), R.layout.my_spinner, spinnerCompany);
-                           nomEnt.setAdapter(nomCompany);
-                       }
-                       @Override
-                       public void onFailure(Call<ListCompany> call, Throwable t) {
-                           Log.d("TAG", "onFailure: " + t.getMessage());
-                       }
-                   });
+                    //On récupère une url et une méthode depuis une interface
+                    Call<ListCompany> callCompany = getMovieDataService.getCompany(ImmutableMap.of("api_key", "34d79476b86de9146c6f439a4b34c68d", "query", s.toString()));
+
+
+                    callCompany.enqueue(new Callback<ListCompany>() {
+                        @Override
+                        //A la réponse
+                        public void onResponse(Call<ListCompany> call, Response<ListCompany> response) {
+                            //On clear le spinner de base
+                            spinnerCompany.clear();
+                            //On récupère le body de la réponse (JSON)
+                            listCompany = response.body();
+                            //On met met le Json dans une liste de company
+                            c1 = listCompany.getAllElement();
+                            //On parcours la liste
+                            for (int i = 0; i<c1.size(); i++) {
+                                //On rajoute au spinner l'item
+                                spinnerCompany.add(c1.get(i).getName());
+                            }
+                            ArrayAdapter nomCompany = new ArrayAdapter(getBaseContext(), R.layout.my_spinner, spinnerCompany);
+                            nomEnt.setAdapter(nomCompany);
+                        }
+                        @Override
+                        public void onFailure(Call<ListCompany> call, Throwable t) {
+                            Log.d("TAG", "onFailure: " + t.getMessage());
+                        }
+                    });
                }
            }
         });
@@ -174,14 +175,17 @@ public class MainActivity extends AppCompatActivity {
         nbNombre.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                Toast.makeText(MainActivity.this,progress, Toast.LENGTH_SHORT).show();
+                if(progress == 0){
+                    progress = 1;
+                }
+
+                //Recupération du nombre de film entre 1 et 20
                 nb.setText(valueOf(progress));
-//                Log.d("onProgressChanged", "onProgressChanged: " + progress);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-//                Toast.makeText(MainActivity.this, "LOL", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -192,10 +196,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        // Initialisation du bouton Autre Recherche
         autreRecherche = findViewById(R.id.Autrerecherche);
 
-
+        //Autre recherche
         autreRecherche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,13 +211,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         rechercher.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
+                //S'il manque une donnée (Entreprise, Genre, Date)
                 if( (listGenre.getElement(sItem.getSelectedItem().toString()) == null)
                         || (dateFilm.getText().toString().isEmpty())
                         || listCompany.getElement(nomEnt.getText().toString()) == null) {
 
+                    //Creation de la pop up
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                     builder.setCancelable(true);
                     builder.setTitle("Champs Manquant");
@@ -227,13 +234,21 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }
+
                 else {
 
-                   int idgenre =  listGenre.getElement(sItem.getSelectedItem().toString()).getId();
-                    Log.d("ea", "onClick: " + listCompany.toString());
-                   int idcompany = listCompany.getElement(nomEnt.getText().toString()).getId();
+                    //Récupération de l'id du genre entré
+                    int idgenre =  listGenre.getElement(sItem.getSelectedItem().toString()).getId();
+//                  Log.d("ea", "onClick: " + listCompany.toString());
 
+                    //Récupération de l'id de la compagnie de prod. entrée
+                    int idcompany = listCompany.getElement(nomEnt.getText().toString()).getId();
+
+                    //Création de la nouvelle vue
                     Intent i = new Intent(view.getContext(), Activite_Liste.class);
+
+                    //rajout des données
+                    i.putExtra("recherche", 1);
                     i.putExtra("idEnt", idcompany);
                     i.putExtra("idGenre", idgenre);
                     i.putExtra("nbResult", nbNombre.getProgress());

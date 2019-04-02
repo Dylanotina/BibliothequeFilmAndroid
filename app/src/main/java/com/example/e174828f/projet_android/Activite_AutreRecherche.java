@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Activite_AutreRecherche extends AppCompatActivity {
 
@@ -13,6 +14,8 @@ public class Activite_AutreRecherche extends AppCompatActivity {
     private Button comming;
     private Button discover;
     private Button annuler;
+    private Button partitre;
+    private EditText titre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class Activite_AutreRecherche extends AppCompatActivity {
         comming = findViewById(R.id.A_venir);
         discover = findViewById(R.id.decouvrir);
         annuler = findViewById(R.id.retour);
+        partitre = findViewById(R.id.partitre);
+        titre = findViewById(R.id.Titre);
 
         pop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +66,22 @@ public class Activite_AutreRecherche extends AppCompatActivity {
             }
         });
 
+        partitre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), Activite_Liste.class);
+                i.putExtra("recherche", 6);
+                if(!titre.getText().toString().isEmpty()){
+                    i.putExtra("titre", titre.getText());
+                }
+                startActivity(i);
+            }
+        });
         annuler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
     }
 }
