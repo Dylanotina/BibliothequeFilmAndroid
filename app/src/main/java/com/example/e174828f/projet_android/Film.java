@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class Film implements Serializable {
     private int id;
     private String original_title;
+    private String title;
     private String overview;
     private String release_date;
-    private String image;
+    private String poster_path;
 
 
 
@@ -29,12 +30,12 @@ public class Film implements Serializable {
         this.filmsResults = filmsResults;
     }
 
-    public String getImage() {
-        return image;
+    public String getPoster_path() {
+        return poster_path;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.poster_path = image;
     }
     public ArrayList<Film> getFilmsResults() {
         return filmsResults;
@@ -42,6 +43,14 @@ public class Film implements Serializable {
 
     public void setFilmsResults(ArrayList<Film> filmsResults) {
         this.filmsResults = filmsResults;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {
