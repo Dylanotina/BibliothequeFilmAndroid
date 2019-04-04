@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Aactivite_AutreRecherche">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autre Recherche"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050000012" />
+
+    <Button
+        android:id="@+id/pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="populaire"
+        app:layout_constraintBottom_toBottomOf="@+id/top-rated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top-rated" />
+
+    <Button
+        android:id="@+id/top-rated"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
+        android:text="+ voté"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23000002" />
+
+    <Button
+        android:id="@+id/A_venir"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:text="A venir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pop"
+        app:layout_constraintStart_toStartOf="@+id/pop"
+        app:layout_constraintTop_toBottomOf="@+id/pop"
+        app:layout_constraintVertical_bias="0.13999999" />
+
+    <Button
+        android:id="@+id/decouvrir"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:text="découvrir"
+        app:layout_constraintBottom_toBottomOf="@+id/A_venir"
+        app:layout_constraintEnd_toEndOf="@+id/top-rated"
+        app:layout_constraintStart_toStartOf="@+id/top-rated"
+        app:layout_constraintTop_toTopOf="@+id/A_venir" />
+
+    <Button
+        android:id="@+id/retour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <EditText
+        android:id="@+id/Titre"
+        android:layout_width="161dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/retour"
+        app:layout_constraintEnd_toEndOf="@+id/A_venir"
+        app:layout_constraintStart_toStartOf="@+id/A_venir"
+        app:layout_constraintTop_toBottomOf="@+id/A_venir"
+        app:layout_constraintVertical_bias="0.24000001" />
+
+    <Button
+        android:id="@+id/partitre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Par titre"
+        app:layout_constraintBottom_toBottomOf="@+id/Titre"
+        app:layout_constraintEnd_toEndOf="@+id/decouvrir"
+        app:layout_constraintStart_toStartOf="@+id/decouvrir"
+        app:layout_constraintTop_toTopOf="@+id/Titre" />
+</android.support.constraint.ConstraintLayout>
