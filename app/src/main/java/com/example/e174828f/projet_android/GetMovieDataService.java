@@ -22,22 +22,22 @@ public interface GetMovieDataService {
     @GET("search/company")
     Call<ListCompany> getCompany(@QueryMap Map<String, String> string);
 
-    @GET("movie/{movie_id}?api_key=6f24e995a9146dc661b833c2a79481b5")
+    @GET("movie/{movie_id}?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<Film> getFilmsResults(@Path("movie_id") int movie_id);
 
     @GET("discover/movie?api_key=6f24e995a9146dc661b833c2a79481b5")
     Call<Films> getFilms(@Query("with_companies") int idCompanies , @Query("with_genres") int idGenre,
                          @Query("year") int year);
-    @GET("movie/popular?api_key=6f24e995a9146dc661b833c2a79481b5")
+    @GET("movie/popular?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<Films> getPopularFilms();
 
-    @GET("movie/top_rated?api_key=6f24e995a9146dc661b833c2a79481b5")
+    @GET("movie/top_rated?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<Films> getTopRatedFilms();
 
-    @GET("movie/upcoming?api_key=6f24e995a9146dc661b833c2a79481b5")
+    @GET("movie/upcoming?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<Films> getUpcommingFilms();
 
-    @GET("search/movie?api_key=6f24e995a9146dc661b833c2a79481b5")
+    @GET("search/movie?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<Films> getMovieByName(@Query("query") String query);
 
 

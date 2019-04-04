@@ -11,6 +11,7 @@ public class Film implements Serializable {
     private String overview;
     private String release_date;
     private String poster_path;
+    private float vote_average;
 
 
 
@@ -21,13 +22,14 @@ public class Film implements Serializable {
 
 
 
-    public Film(int id, String original_title, String overview, String release_date, Genre genre,ArrayList<Film> filmsResults) {
+    public Film(int id, String original_title, String overview, String release_date, Genre genre,ArrayList<Film> filmsResults, float vote_average) {
         this.id = id;
         this.original_title = original_title;
         this.overview = overview;
         this.release_date = release_date;
         this.genre = genre;
         this.filmsResults = filmsResults;
+        this.vote_average = vote_average;
     }
 
     public String getPoster_path() {
@@ -92,4 +94,8 @@ public class Film implements Serializable {
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
+
+    public float getvote_average(){return this.vote_average;}
+
+    public void setvote_average(int rate){this.vote_average = rate;}
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -20,6 +21,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static java.lang.String.valueOf;
+
 public class Visuel_Film_Activite extends AppCompatActivity {
 
 
@@ -29,6 +32,7 @@ public class Visuel_Film_Activite extends AppCompatActivity {
     private Film result;
     private String image;
     private Button retour;
+    private RatingBar rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class Visuel_Film_Activite extends AppCompatActivity {
     titre =findViewById(R.id.titre);
     text1 =findViewById(R.id.text);
     retour =findViewById(R.id.buttonRetour);
+    rate = findViewById(R.id.rate);
+
 
         Intent reception = getIntent();
      int movieid = reception.getIntExtra("id",0);
@@ -59,6 +65,8 @@ public class Visuel_Film_Activite extends AppCompatActivity {
                 titre.setText(result.getTitle());
                 text1.setText(result.getOverview());
                 image = result.getPoster_path();
+                rate.setRating(result.getvote_average()/2);
+
                  if(image!=null) {
                      Picasso.get().load("https://image.tmdb.org/t/p/original" + image)
                              .resize(600, 800)

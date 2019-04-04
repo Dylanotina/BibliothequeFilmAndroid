@@ -6,7 +6,7 @@ import java.util.List;
 
 class Films {
 
-     @SerializedName("results")
+    @SerializedName("results")
     private List<Film> result;
 
     @Override
