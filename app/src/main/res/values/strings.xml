@@ -2,4 +2,6 @@
     <string name="app_name">La bibliothèque des films</string>
     <string name="overview">Overview</string>
     <string name="title">Titre</string>
+    <string name="retour">Retour</string>
+    <string name="resultats">Resultats de la recherche</string>
 </resources>

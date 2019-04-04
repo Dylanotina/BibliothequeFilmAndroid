@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +28,7 @@ public class Visuel_Film_Activite extends AppCompatActivity {
     private TextView titre;
     private Film result;
     private String image;
-    private ImageFilm paths;
+    private Button retour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class Visuel_Film_Activite extends AppCompatActivity {
     imageView =findViewById(R.id.image_film);
     titre =findViewById(R.id.titre);
     text1 =findViewById(R.id.text);
+    retour =findViewById(R.id.buttonRetour);
+
         Intent reception = getIntent();
      int movieid = reception.getIntExtra("id",0);
 
@@ -47,14 +51,21 @@ public class Visuel_Film_Activite extends AppCompatActivity {
 
         GetMovieDataService api =retrofit.create(GetMovieDataService.class);
          Call<Film> filmResult=api.getFilmsResults(movieid);
+
          filmResult.enqueue(new Callback<Film>() {
              @Override
              public void onResponse(Call<Film> call, Response<Film> response) {
                 result =response.body();
-                titre.setText(result.getOriginal_title());
+                titre.setText(result.getTitle());
                 text1.setText(result.getOverview());
-                image = result.getImage();
+                image = result.getPoster_path();
+                 if(image!=null) {
+                     Picasso.get().load("https://image.tmdb.org/t/p/original" + image)
+                             .resize(600, 800)
+                             .centerCrop()
+                             .into(imageView);
 
+                 }
              }
 
              @Override
@@ -62,34 +73,12 @@ public class Visuel_Film_Activite extends AppCompatActivity {
                  Log.d("TAG", "onFailure: " + t.getMessage());
              }
          });
-
-        Call<ImageFilm> imagesResults = api.getImageFilm(movieid);
-        imagesResults.enqueue(new Callback<ImageFilm>() {
-            @Override
-            public void onResponse(Call<ImageFilm> call, Response<ImageFilm> response) {
-                paths = response.body();
-                Poster[] tab = paths.getPosters();
-                if(paths !=null) {
-                    Log.d("TAG","debug " + tab[0].getPath_file());
-                    image = tab[0].getPath_file();
-                }
-                if(image!=null) {
-                    Picasso.get().load("https://image.tmdb.org/t/p/original" + image)
-                            .resize(200, 200)
-                            .centerCrop()
-                            .into(imageView);
-
-                }else{
-                    Log.d("TAG", "onFailure: erreur");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ImageFilm> call, Throwable t) {
-
-            }
-        });
-
+    retour.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    });
 
 
 

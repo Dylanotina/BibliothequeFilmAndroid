@@ -72,7 +72,7 @@ public class Activite_AutreRecherche extends AppCompatActivity {
                 Intent i = new Intent(v.getContext(), Activite_Liste.class);
                 i.putExtra("recherche", 6);
                 if(!titre.getText().toString().isEmpty()){
-                    i.putExtra("titre", titre.getText());
+                    i.putExtra("titre", titre.getText().toString());
                 }
                 startActivity(i);
             }
