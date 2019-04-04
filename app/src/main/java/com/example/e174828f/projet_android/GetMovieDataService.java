@@ -40,5 +40,7 @@ public interface GetMovieDataService {
     @GET("search/movie?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr")
     Call<Films> getMovieByName(@Query("query") String query);
 
+    @GET("discover/movie?api_key=6f24e995a9146dc661b833c2a79481b5&language=fr-fr&sort_by=revenue_desc")
+    Call<Films> getDiscoverMovie();
 
 }

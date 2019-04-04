@@ -262,7 +262,7 @@ private int nbResult;
                         .build();
 
                 GetMovieDataService api5 =retrofit5.create(GetMovieDataService.class);
-                Call<Films> call5 = api5.getFilms(0,0,0);
+                Call<Films> call5 = api5.getDiscoverMovie();
 
 
 
