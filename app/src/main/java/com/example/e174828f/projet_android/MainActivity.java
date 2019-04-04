@@ -27,7 +27,6 @@ import com.google.gson.GsonBuilder;
 import com.google.common.collect.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
