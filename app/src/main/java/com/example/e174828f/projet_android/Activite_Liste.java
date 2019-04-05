@@ -70,10 +70,13 @@ private int nbResult;
                             listFilm = listFilms.getAllElement();
                             films = new String[nbResult];
                             Log.d("TAG ERREUR","val :" +listFilm.size());
-                            for (int i=0; i<listFilm.size();i++) {
+                            for (int i=0; i<=listFilm.size()-1;i++) {
                                 films[i] = listFilm.get(i).getTitle();
-
+                                if(films[i]==null){
+                                    break;
+                                }
                             }
+
                         }
                         ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,films);
                         mListView.setAdapter(mArrayAdapter);
