@@ -48,7 +48,6 @@ private int nbResult;
                 int entreprise =recherche.getIntExtra("idEnt",0);
                 int genre =recherche.getIntExtra("idGenre",0);
                  nbResult=recherche.getIntExtra("nbResult",0);
-                Log.d("TAG ERREUR","val :" +nbResult);
                  CharSequence date= recherche.getCharSequenceExtra("date");
                 int dateF =Integer.parseInt(date.toString());
 
@@ -69,7 +68,6 @@ private int nbResult;
                             listFilms = response.body();
                             listFilm = listFilms.getAllElement();
                             films = new String[nbResult];
-                            Log.d("TAG ERREUR","val :" +listFilm.size());
                             for (int i=0; i<=listFilm.size()-1;i++) {
                                 films[i] = listFilm.get(i).getTitle();
                                 if(films[i]==null){
@@ -310,7 +308,6 @@ private int nbResult;
                 break;
             case 6:
                 String filmTitre = recherche.getStringExtra("titre");
-                Log.d("TAG ERREUR","val :" +filmTitre);
                 Retrofit retrofit6 = new Retrofit.Builder()
                         .baseUrl(GetMovieDataService.BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
